@@ -7,17 +7,8 @@ built from basic RTL components. The design uses an **8-bit datapath**,
 
 ## Architecture
 
-Add the architecture image to the repository as:
-
-``` text
-docs/tiny_cpu.png
-```
-
-Then display it with:
-
-``` markdown
 ![Tiny CPU Architecture](docs/tiny_cpu.png)
-```
+
 
 ### Main Components
 
@@ -40,17 +31,16 @@ Then display it with:
 [10:8]  Opcode
 [7:0]   Operand
 ```
-
-  Opcode   Instruction   Operation
-  -------- ------------- ---------------------
-  `000`    LOAD A        `A ← immediate`
-  `001`    LOAD B        `B ← immediate`
-  `010`    ADD           `A ← A + B`
-  `011`    SUB           `A ← A - B`
-  `100`    AND           `A ← A & B`
-  `101`    JMP           `PC ← operand[3:0]`
-  `110`    JZ            Jump if `A == 0`
-  `111`    HALT          Stop execution
+| Opcode | Instruction | Operation |
+|--------|-------------|-----------|
+| `000` | LOAD A | `A ← immediate` |
+| `001` | LOAD B | `B ← immediate` |
+| `010` | ADD | `A ← A + B` |
+| `011` | SUB | `A ← A - B` |
+| `100` | AND | `A ← A & B` |
+| `101` | JMP | `PC ← operand[3:0]` |
+| `110` | JZ | Jump if `A == 0` |
+| `111` | HALT | Stop execution |
 
 ## Execution
 
