@@ -115,21 +115,141 @@ module tiny_cpu_tb;
         #1;
         check_cpu(3, 14, 4, {3'b010, 8'd0}, 0);
 
-        // Edge 7: FETCH HALT
+        // Edge 7: FETCH LOAD B, 2
         @(posedge clk);
         #1;
-        check_cpu(4, 14, 4, {3'b111, 8'd0}, 0);
+        check_cpu(4, 14, 4, {3'b001, 8'd2}, 0);
 
-        // Edge 8: EXECUTE HALT
+        // Edge 8: EXECUTE LOAD B, 2
         @(posedge clk);
         #1;
-        check_cpu(4, 14, 4, {3'b111, 8'd0}, 1);
+        check_cpu(4, 14, 2, {3'b001, 8'd2}, 0);
+
+        // Edge 9: FETCH SUB
+        @(posedge clk);
+        #1;
+        check_cpu(5, 14, 2, {3'b011, 8'd0}, 0);
+
+        // Edge 10: EXECUTE SUB
+        @(posedge clk);
+        #1;
+        check_cpu(5, 12, 2, {3'b011, 8'd0}, 0);
+
+        // Edge 11: FETCH LOAD B, 15
+        @(posedge clk);
+        #1;
+        check_cpu(6, 12, 2, {3'b001, 8'd15}, 0);
+
+        // Edge 12: EXECUTE LOAD B, 15
+        @(posedge clk);
+        #1;
+        check_cpu(6, 12, 15, {3'b001, 8'd15}, 0);
+
+        // Edge 13: FETCH AND
+        @(posedge clk);
+        #1;
+        check_cpu(7, 12, 15, {3'b100, 8'd0}, 0);
+
+        // Edge 14: EXECUTE AND
+        @(posedge clk);
+        #1;
+        check_cpu(7, 12, 15, {3'b100, 8'd0}, 0);
+
+        // Edge 15: FETCH LOAD A, 20
+        @(posedge clk);
+        #1;
+        check_cpu(8, 12, 15, {3'b000, 8'd20}, 0);
+
+        // Edge 16: EXECUTE LOAD A, 20
+        @(posedge clk);
+        #1;
+        check_cpu(8, 20, 15, {3'b000, 8'd20}, 0);
+
+        // Edge 17: FETCH LOAD B, 5
+        @(posedge clk);
+        #1;
+        check_cpu(9, 20, 15, {3'b001, 8'd5}, 0);
+
+        // Edge 18: EXECUTE LOAD B, 5
+        @(posedge clk);
+        #1;
+        check_cpu(9, 20, 5, {3'b001, 8'd5}, 0);
+
+        // Edge 19: FETCH ADD
+        @(posedge clk);
+        #1;
+        check_cpu(10, 20, 5, {3'b010, 8'd0}, 0);
+
+        // Edge 20: EXECUTE ADD
+        @(posedge clk);
+        #1;
+        check_cpu(10, 25, 5, {3'b010, 8'd0}, 0);
+
+        // Edge 21: FETCH LOAD B, 3
+        @(posedge clk);
+        #1;
+        check_cpu(11, 25, 5, {3'b001, 8'd3}, 0);
+
+        // Edge 22: EXECUTE LOAD B, 3
+        @(posedge clk);
+        #1;
+        check_cpu(11, 25, 3, {3'b001, 8'd3}, 0);
+
+        // Edge 23: FETCH SUB
+        @(posedge clk);
+        #1;
+        check_cpu(12, 25, 3, {3'b011, 8'd0}, 0);
+
+        // Edge 24: EXECUTE SUB
+        @(posedge clk);
+        #1;
+        check_cpu(12, 22, 3, {3'b011, 8'd0}, 0);
+
+        // Edge 25: FETCH LOAD B, 7
+        @(posedge clk);
+        #1;
+        check_cpu(13, 22, 3, {3'b001, 8'd7}, 0);
+
+        // Edge 26: EXECUTE LOAD B, 7
+        @(posedge clk);
+        #1;
+        check_cpu(13, 22, 7, {3'b001, 8'd7}, 0);
+
+        // Edge 27: FETCH AND
+        @(posedge clk);
+        #1;
+        check_cpu(14, 22, 7, {3'b100, 8'd0}, 0);
+
+        // Edge 28: EXECUTE AND
+        @(posedge clk);
+        #1;
+        check_cpu(14, 6, 7, {3'b100, 8'd0}, 0);
+
+        // Edge 29: FETCH ADD
+        @(posedge clk);
+        #1;
+        check_cpu(15, 6, 7, {3'b010, 8'd0}, 0);
+
+        // Edge 30: EXECUTE ADD
+        @(posedge clk);
+        #1;
+        check_cpu(15, 13, 7, {3'b010, 8'd0}, 0);
+
+        // Edge 31: FETCH HALT (PC wraps from 15 to 0)
+        @(posedge clk);
+        #1;
+        check_cpu(0, 13, 7, {3'b111, 8'd0}, 0);
+
+        // Edge 32: EXECUTE HALT
+        @(posedge clk);
+        #1;
+        check_cpu(0, 13, 7, {3'b111, 8'd0}, 1);
 
         // Verify the CPU remains halted.
         repeat (3) begin
             @(posedge clk);
             #1;
-            check_cpu(4, 14, 4, {3'b111, 8'd0}, 1);
+            check_cpu(0, 13, 7, {3'b111, 8'd0}, 1);
         end
 
         if (errors == 0) begin

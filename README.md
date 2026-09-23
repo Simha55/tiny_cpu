@@ -5,6 +5,9 @@ built from basic RTL components. The design uses an **8-bit datapath**,
 **11-bit instructions**, a **4-bit program counter**, and a simple
 **FETCH → EXECUTE → HALTED** control FSM.
 
+For a detailed explanation of every RTL module, control signal, and instruction
+cycle, see the [component guide](docs/components.md).
+
 ## Architecture
 
 ![Tiny CPU Architecture](docs/tiny_cpu.png)
@@ -74,7 +77,8 @@ tiny_cpu/
 ├── tb/
 │   └── *_tb.v
 ├── docs/
-│   └── tiny_cpu_architecture.png
+│   ├── components.md
+│   └── tiny_cpu.png
 ├── build/
 └── waveforms/
 ```
